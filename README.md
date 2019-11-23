@@ -14,4 +14,4 @@ Make sure you have installed the Mongo driver in your php, and config php.ini.
 <br>
 <i>If you want to use mongodb, just remove extension .mongo in .env and /config/database.php.mongo</i>
 <br>
-<i>If you want to use mongodb, just remove extension .mongo in .env and /config/database.php.mongo</i>
+<i>If you want to use mysql, just remove extension .mongo in .env and /config/database.php.mysql</i>

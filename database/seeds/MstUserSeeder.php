@@ -16,14 +16,14 @@ class MstUserSeeder extends Seeder
 
         $faker = Faker::create('id_ID');
 
-        foreach (range(1, 50) as $index) {
+        foreach (range(1, 100) as $index) {
 
             MstUser::create([
                 'user_name' => $faker->name,
                 'user_email' => $faker->unique()->safeEmail,
                 'user_email_verified_at' => now(),
                 'user_password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-                'user_remember_token' => Str::random(10),
+                'remember_token' => Str::random(10),
             ]);
         }
         // factory('App\MstUser', 10)->create();
