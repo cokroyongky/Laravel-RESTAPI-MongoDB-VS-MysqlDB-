@@ -7,21 +7,34 @@ use Illuminate\Support\Facades\Schema;
 class CreateDtScheduleTable extends Migration
 {
     /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $tableName = 'dt_schedule';
+
+    /**
      * Run the migrations.
+     * @table dt_schedule
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('dt_schedule', function (Blueprint $table) {
-            $table->increments('id',5);
-            $table->integer('train_id');
-            $table->integer('class_id');
-            $table->integer('station_departure_id');
-            $table->integer('station_arrived_id');
-            $table->time('departure_time');
-            $table->time('arrived_time');
-            $table->timestamps();
+        Schema::create($this->tableName, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id')->comment('ID of Schedule');
+            $table->integer('train_id')->comment('Train ID of Schedule');
+            $table->integer('class_id')->comment('Class ID of Schedule');
+            $table->integer('station_departure_id')->comment('Station Departure of Schedule');
+            $table->integer('station_arrived_id')->comment('Station Arrived of Schedule');
+            $table->time('departure_time')->comment('Departure Time of Schedule');
+            $table->time('arrived_time')->comment('Arrived Time of Schedule');
+            $table->index(["class_id"], 'class_id');
+            $table->index(["station_arrived_id"], 'station_arrived_id');
+            $table->index(["train_id"], 'train_id');
+            $table->index(["station_departure_id"], 'station_departure_id');
+            $table->softDeletes();
+            $table->nullableTimestamps();
         });
     }
 
@@ -30,8 +43,8 @@ class CreateDtScheduleTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('dt_schedule');
-    }
+     public function down()
+     {
+       Schema::dropIfExists($this->tableName);
+     }
 }

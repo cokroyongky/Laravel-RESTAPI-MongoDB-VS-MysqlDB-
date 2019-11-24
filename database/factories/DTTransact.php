@@ -3,8 +3,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\DTTransact;
-use \App\MstUser;
-use \App\DTSchedule;
+use App\Models\MstUser;
+use App\Models\DTSchedule;
 use Faker\Generator as Faker;
 use Faker\Provider\Base;
 

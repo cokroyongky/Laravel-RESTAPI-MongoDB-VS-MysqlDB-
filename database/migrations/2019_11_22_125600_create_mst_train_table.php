@@ -7,18 +7,29 @@ use Illuminate\Support\Facades\Schema;
 class CreateMstTrainTable extends Migration
 {
     /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $tableName = 'mst_train';
+
+    /**
      * Run the migrations.
+     * @table mst_train
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('mst_train', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('train_name',30);
-            $table->integer('train_class_id');
-            $table->integer('train_area_id');
-            $table->timestamps();
+        Schema::create($this->tableName, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id')->comment('ID of train');
+            $table->string('train_name', 100)->comment('Name of train');
+            $table->integer('train_class_id')->comment('Class ID of train');
+            $table->integer('train_area_id')->comment('Area ID of train');
+            $table->index(["train_area_id"], 'train_area_id');
+            $table->index(["train_class_id"], 'train_class_id');
+            $table->softDeletes();
+            $table->nullableTimestamps();
         });
     }
 
@@ -27,8 +38,8 @@ class CreateMstTrainTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('mst_train');
-    }
+     public function down()
+     {
+       Schema::dropIfExists($this->tableName);
+     }
 }

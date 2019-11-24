@@ -7,17 +7,26 @@ use Illuminate\Support\Facades\Schema;
 class CreateMstStationTable extends Migration
 {
     /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $tableName = 'mst_station';
+
+    /**
      * Run the migrations.
+     * @table mst_station
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('mst_station', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('station_name',100);
-            $table->string('station_abbreviation',5);
-            $table->timestamps();
+        Schema::create($this->tableName, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id')->comment('ID of station');
+            $table->string('station_name', 100)->comment('Name of station');
+            $table->string('station_abbreviation', 5)->comment('Abbreviation of station');
+            $table->softDeletes();
+            $table->nullableTimestamps();
         });
     }
 
@@ -26,8 +35,8 @@ class CreateMstStationTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('mst_station');
-    }
+     public function down()
+     {
+       Schema::dropIfExists($this->tableName);
+     }
 }

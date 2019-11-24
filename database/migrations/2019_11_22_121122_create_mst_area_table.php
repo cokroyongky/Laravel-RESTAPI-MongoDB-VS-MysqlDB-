@@ -7,16 +7,25 @@ use Illuminate\Support\Facades\Schema;
 class CreateMstAreaTable extends Migration
 {
     /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $tableName = 'mst_area';
+
+    /**
      * Run the migrations.
+     * @table mst_area
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('mst_area', function (Blueprint $table) {
-            $table->increments('id',5);
-            $table->string('area_name', 20);
-            $table->timestamps();
+        Schema::create($this->tableName, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id')->comment('ID of Area');
+            $table->string('area_name', 20)->nullable()->default(null)->comment('Name of Area');
+            $table->softDeletes();
+            $table->nullableTimestamps();
         });
     }
 
@@ -27,6 +36,6 @@ class CreateMstAreaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mst_area');
+        Schema::dropIfExists($this->tableName);
     }
 }
