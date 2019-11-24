@@ -13,7 +13,11 @@ This laravel project for my research, to know the best database between Mongo VS
 Make sure you have installed the <a href="http://pecl.php.net/package/mongodb">Mongo driver</a> in your php, and config php.ini.
 <br>
 <br>
+Set up your config
+<hr>
 &#11088;<i><b>If you want to use mongodb, just remove extension .mongo in .env and /config/database.php.mongo</b></i>
 <br>
 &#11088;<i><b>If you want to use mysql, just remove extension .mysql in .env and /config/database.php.mysql</b></i>
+<br>
+Make sure your project is connected to the database, and run <code>php artisan migrate</code> , then run <code>php artisan db:seed</code> to create record on tables
 
